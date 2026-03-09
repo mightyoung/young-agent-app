@@ -379,7 +379,7 @@ src/features/ai/services/rag/
 
 | 问题 | 选项 | 说明 |
 |------|------|------|
-| **LLM 提供商** | DeepSeek | API: sk-031ec5a58a574b36ab1e65ea642e9555 |
+| **LLM 提供商** | DeepSeek | API Key 存储在安全位置 |
 | **API Key 管理** | Keychain (expo-secure-store) | 不传递到后端，纯客户端 |
 | **记忆复杂度** | 完整 (两层: 会话+长期) | 参考 nanobot 设计 |
 | **工具数量** | 3个核心 | 设备、任务、隐患 |
