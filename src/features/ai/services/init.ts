@@ -7,6 +7,9 @@ import { syncBusinessDataToRAG } from './businessDataSync';
 // In production, user should input their own key
 const ENV_API_KEY = process.env.DEEPSEEK_API_KEY;
 
+// Test mode: allow using a test API key when no real key is configured
+const TEST_MODE = typeof window !== 'undefined' && (__DEV__ || process.env.NODE_ENV === 'test');
+
 export async function initializeAIService(): Promise<boolean> {
   console.log('[AI Service] Initializing...');
 
@@ -21,6 +24,10 @@ export async function initializeAIService(): Promise<boolean> {
         console.log('[AI Service] Loading API key from .env...');
         await secureStorage.setApiKey(ENV_API_KEY);
         console.log('[AI Service] API key saved to Keychain');
+      } else if (TEST_MODE) {
+        // In test mode, allow app to run without API key for UI testing
+        console.log('[AI Service] Test mode: running without API key');
+        return true;
       } else {
         console.log('[AI Service] No API key found. Please configure in settings.');
         return false;
@@ -43,6 +50,13 @@ export async function initializeAIService(): Promise<boolean> {
     return true;
   } catch (error) {
     console.error('[AI Service] Initialization failed:', error);
+
+    // In test mode, return true anyway to allow UI testing
+    if (TEST_MODE) {
+      console.log('[AI Service] Test mode: continuing despite error');
+      return true;
+    }
+
     return false;
   }
 }

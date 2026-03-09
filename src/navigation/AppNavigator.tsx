@@ -156,6 +156,68 @@ const MainNavigator = () => (
   </Tab.Navigator>
 );
 
+// Deep linking configuration for web testing
+const linking = {
+  prefixes: ['http://localhost:8082', 'http://localhost:8081', 'mightyoungapp://'],
+  config: {
+    screens: {
+      Auth: {
+        screens: {
+          Splash: 'splash',
+          Login: 'login',
+          BindEnterprise: 'bind-enterprise/:userId',
+        },
+      },
+      Main: {
+        screens: {
+          Home: 'home',
+          AI: {
+            screens: {
+              AIAssistant: 'ai',
+              AIDataCenter: 'ai/data-center',
+              AIProfile: 'ai/profile',
+            },
+          },
+        },
+      },
+      Camera: 'camera',
+      CameraEntry: 'camera-entry',
+      ScanCheck: 'scan-check/:deviceId',
+      HazardReport: 'hazard-report',
+      HazardResult: 'hazard-result/:hazardId',
+      SafetyCheck: 'safety-check/:taskId',
+      InspectionResult: 'inspection-result/:recordId',
+      InspectionHistory: 'inspection-history',
+      InspectionDetail: 'inspection-detail/:id',
+      HazardList: 'hazard-list',
+      HazardDetail: 'hazard-detail/:id',
+      HazardConfirm: 'hazard-confirm/:id',
+      HazardRectify: 'hazard-rectify/:id',
+      HazardAccept: 'hazard-accept/:id',
+      DeviceList: 'device-list',
+      DeviceDetail: 'device-detail/:id',
+      DeviceChecklist: 'device-checklist/:deviceId',
+      Messages: 'messages',
+      HazardReview: 'hazard-review',
+      TaskAssign: 'task-assign',
+      Settings: 'settings',
+      AISettings: 'ai-settings',
+      BackendSettings: 'backend-settings',
+      Statistics: 'statistics',
+      KnowledgeBase: 'knowledge-base',
+      KnowledgeDetail: 'knowledge-detail',
+    },
+  },
+};
+
+// Expose test login for browser console
+if (typeof window !== 'undefined') {
+  (window as any).testLogin = () => {
+    const { testLogin } = useAuthStore.getState();
+    testLogin();
+  };
+}
+
 // Root Navigator
 const RootNavigator = () => {
   const { isLoggedIn, isLoading } = useAuthStore();
@@ -254,7 +316,7 @@ function AppNavigatorContent() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar style={isDark ? 'light' : 'dark'} />
-      <NavigationContainer>
+      <NavigationContainer linking={linking}>
         <RootNavigator />
       </NavigationContainer>
     </GestureHandlerRootView>

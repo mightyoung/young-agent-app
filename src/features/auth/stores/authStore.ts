@@ -2,6 +2,9 @@ import { create } from 'zustand';
 import { User, UserRole } from '../../../types';
 import { userStorage, mmkvStorage, STORAGE_KEYS } from '../../../core/storage/mmkv';
 
+// Test mode - bypass authentication for E2E testing
+const TEST_MODE = process.env.NODE_ENV === 'test' || __DEV__;
+
 interface AuthState {
   user: User | null;
   token: string | null;
@@ -14,6 +17,8 @@ interface AuthState {
   logout: () => void;
   updateUser: (user: Partial<User>) => void;
   setLoading: (loading: boolean) => void;
+  // Test mode actions
+  testLogin: () => void;
 }
 
 // Mock user data for demo
@@ -69,9 +74,26 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
     if (user && token) {
       set({ user, token, isLoggedIn: true, isLoading: false });
+    } else if (TEST_MODE) {
+      // Auto-login as admin in test mode
+      const adminUser = mockUsers['admin'];
+      const token = `mock_token_${Date.now()}`;
+      userStorage.saveUser(adminUser.user);
+      userStorage.saveToken(token);
+      set({ user: adminUser.user, token, isLoggedIn: true, isLoading: false });
     } else {
       set({ isLoading: false });
     }
+  },
+
+  // Test mode login - can be called from outside
+  testLogin: () => {
+    if (!TEST_MODE) return;
+    const adminUser = mockUsers['admin'];
+    const token = `mock_token_${Date.now()}`;
+    userStorage.saveUser(adminUser.user);
+    userStorage.saveToken(token);
+    set({ user: adminUser.user, token, isLoggedIn: true, isLoading: false });
   },
 
   login: async (username: string, password: string) => {
