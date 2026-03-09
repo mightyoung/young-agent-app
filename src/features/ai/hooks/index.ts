@@ -15,3 +15,6 @@ export type {
 
 // useProviderValidator - default export (backward compatible)
 export { useProviderValidator, default } from './useProviderValidator';
+
+// Streaming hooks - 流式UI功能
+export * from './streaming';

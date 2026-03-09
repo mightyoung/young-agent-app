@@ -407,7 +407,8 @@ Vercel AI SDK 是行业领先的 AI 聊天 SDK，其核心架构：
 | `useCompletion` | ✅ 简单补全 | ❌ 无 | 可选 |
 | `useObject` | ✅ 结构化输出 | ❌ 无 | 高级功能 |
 | `createStreamableUI` | ✅ 流式组件 | ❌ 无 | **重要** |
-| `createStreamableValue` | ✅ 流式值 | ⚠️ 部分 | 需要标准化 |
+| `createStreamableValue` | ✅ 流式值 | ✅ 完成 | 标准化实现 |
+| `createStreamableUI` | ✅ 流式UI | ✅ 完成 | 对齐Vercel |
 | 消息格式转换 | `convertToModelMessages` | ❌ 无 | 可选 |
 | 消息裁剪 | `pruneMessages` | ❌ 无 | 内存优化 |
 | 内置工具调用 | `streamText` 集成 | ⚠️ 手动 | 需要简化 |
@@ -415,20 +416,20 @@ Vercel AI SDK 是行业领先的 AI 聊天 SDK，其核心架构：
 ### 改进建议
 
 #### Phase S1: 流式 UI 增强 (高优先级)
-- [ ] S1.1 实现 `createStreamableUI` 类似功能
-- [ ] S1.2 支持流式渲染 React 组件
-- [ ] S1.3 标准化 `createStreamableValue`
+- [x] S1.1 实现 `createStreamableUI` ✅ (2026-03-09 完成)
+- [x] S1.2 支持流式渲染 React 组件 ✅ (2026-03-09 完成)
+- [x] S1.3 标准化 `createStreamableValue` ✅ (2026-03-09 完成)
 
 #### Phase S2: 状态管理简化 (中优先级)
 - [x] S2.1 创建 `useChat` hook 简化版 ✅ (2026-03-09 完成)
 - [x] S2.2 添加消息裁剪功能 ✅ (已集成在 useChat 中)
-- [ ] S2.3 添加消息格式转换
+- [x] S2.3 添加消息格式转换 ✅ (2026-03-09 完成)
 
 #### Phase S3: 高级功能 (低优先级)
-- [ ] S3.1 实现 `useObject` 结构化输出
-- [ ] S3.2 实现 `useCompletion` 补全
-- [ ] S3.3 增强工具调用集成
+- [x] S3.1 实现 `useObject` 结构化输出 ✅ (2026-03-09 完成)
+- [x] S3.2 实现 `useCompletion` 补全 ✅ (2026-03-09 完成)
+- [x] S3.3 增强工具调用集成 ✅ (2026-03-09 完成)
 
 ---
 
-*更新日期: 2026-03-09*
+*更新日期: 2026-03-09 (S1-S3 全部完成)*
