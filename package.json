@@ -1,5 +1,6 @@
 {
-  "name": "might-young-app",
+  "name": "young-agent",
+  "description": "AI-powered industrial safety inspection app with Expo and React Native",
   "main": "index.js",
   "version": "1.0.0",
   "scripts": {

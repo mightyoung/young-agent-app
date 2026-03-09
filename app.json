@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "might-young-app",
-    "slug": "might-young-app",
+    "name": "Young-Agent",
+    "slug": "young-agent",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
