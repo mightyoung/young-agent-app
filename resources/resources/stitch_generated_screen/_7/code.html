@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "tech-blue": "#24A1DE",
+                        "success-green": "#07C160",
+                        "danger-red": "#ff4b2b",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0a0a0a",
+                    },
+                    fontFamily: {
+                        "display": ["Microsoft YaHei", "Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+        .custom-card {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+        }
+    </style>
+<style>
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+        .custom-card {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+        }
+    </style>
+</head>
+<body class="bg-white text-black font-display antialiased min-h-screen flex flex-col overflow-hidden">
+<!-- Top Navigation / Progress -->
+<header class="p-4 flex flex-col gap-4 sticky top-0 z-20 bg-white">
+<div class="flex items-center justify-between">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-zinc-700">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="font-bold tracking-tight text-2xl text-black">扫码检查</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-zinc-700">history</span>
+</button>
+</div>
+<!-- High-Tech Progress Bar -->
+<div class="px-2"><p class="text-zinc-500 text-sm mb-1">设备单元: MTR-082-A</p>
+<div class="flex justify-between items-end mb-1">
+<span class="font-bold text-sm text-black">巡检进度</span>
+<span class="text-[10px] font-mono text-primary font-bold text-sm" style="color: #0066FF;">60% 已完成</span>
+</div>
+<div class="w-full bg-zinc-100 rounded-full overflow-hidden flex h-3">
+<div class="h-full bg-tech-blue neon-border-blue shadow-[0_0_8px_#00d2ff]" style="width: 60%; background-color: #0066FF;"></div>
+</div>
+</div>
+</header>
+<!-- Main Content: Stacked Card Layout -->
+<main class="flex-1 relative flex flex-col items-center justify-center p-6 overflow-hidden">
+<!-- Background Stack Cards (Visual Depth) -->
+<!-- Primary Inspection Card -->
+<div class="w-full max-w-md custom-card rounded-3xl overflow-hidden flex flex-col relative group aspect-[3/4.8]" style="">
+<!-- Scanline / Grid Overlay Effect -->
+<!-- Motor Image Section -->
+<div class="h-1/2 relative">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="High-tech electric motor unit for industrial inspection" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB7l2NDh7DuH1DyYNyk3fDs-YN6nzwgMbVoiHD827N41PnIn_08CrWS1hoE74FP-bSmtWfsSIhwR2ZETiN0FdtvBibZLW6YdExHh5kKzoeqZ4fX_TD_RnHjlDRLWpBYKp0h4F1XSAarMrx2V3r8-Q5mqqRuHdgbX6Iemy3lNBQVi2GSyhfIhbklymnenQ7_mpa0RcwYweKFqTeYhM_46CYRASHZtgy-nWKH4cifq0jTZcY0ILbMQQZe4eIibfHBDcEvkTmTA5u1Bow')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent"></div>
+<!-- HUD Elements -->
+<div class="absolute top-4 left-4 flex flex-col gap-1">
+<div class="px-2 py-0.5 bg-tech-blue/20 backdrop-blur-md border border-tech-blue/40 rounded text-[10px] font-bold text-tech-blue flex items-center gap-1" style="background-color: rgba(0, 102, 255, 0.1); border-color: #0066FF; color: #0066FF;">
+<span class="w-1.5 h-1.5 rounded-full bg-tech-blue animate-pulse" style="background-color: #0066FF;"></span>
+                        LIVE SENSOR LINK
+                    </div>
+</div>
+<div class="absolute bottom-4 right-4 text-right">
+<p class="text-[10px] text-zinc-200 font-mono text-base">X-AXIS: 1.22mm/s</p>
+<p class="text-[10px] text-zinc-200 font-mono text-base">TEMP: 68.4°C</p>
+</div>
+</div>
+<!-- Text Content Section -->
+<div class="flex-1 p-6 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h2 class="font-bold tracking-tight text-zinc-900 text-2xl">步骤 6：振动分析</h2>
+<span class="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded" style="background-color: #f1f5f9; color: #64748b;">06/10</span>
+</div>
+<p class="text-zinc-600 leading-relaxed mb-4 text-base">手动检查主传动轴承是否存在异常振动和热特征。</p>
+</div>
+<!-- Pass Criteria Box -->
+<div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-tech-blue text-sm" style="color: #0066FF;">assignment_turned_in</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-zinc-500">容差阈值</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="text-slate-500 uppercase text-xs">振动</p>
+<p class="font-mono text-zinc-800 text-base">&lt; 2.5mm/s</p>
+</div>
+<div>
+<p class="text-slate-500 uppercase text-xs">温度</p>
+<p class="font-mono text-zinc-800 text-base">&lt; 75°C</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Actions & Input -->
+<footer class="p-6 flex flex-col gap-4 bg-white">
+<!-- Pass / Fail High Contrast Buttons -->
+<div class="flex gap-4">
+<button class="flex-1 rounded-2xl flex items-center justify-center gap-2 bg-red-50 text-red-600 font-bold transition-all active:scale-95 group h-16 text-lg"><span class="material-symbols-outlined group-active:animate-ping">close</span> 不合格</button>
+<button class="flex-1 rounded-2xl flex items-center justify-center gap-2 bg-[#07C160] text-white font-bold transition-all active:scale-95 group h-16 text-lg"><span class="material-symbols-outlined group-active:scale-125 transition-transform">check</span> 合格</button>
+</div>
+<!-- WeChat Style Modern Input Bar -->
+<div class="glass-panel rounded-2xl p-1 pl-4 flex items-center gap-2 border-zinc-200 shadow-sm">
+<button class="text-slate-400 hover:text-tech-blue transition-colors p-2"><span class="material-symbols-outlined text-tech-blue" style="color: #0066FF;">mic</span></button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-base text-black placeholder:text-zinc-400" placeholder="添加巡检备注..." type="text"/>
+<button class="text-slate-400 hover:text-tech-blue transition-colors">
+<span class="material-symbols-outlined text-tech-blue" style="color: #0066FF;">add_circle</span>
+</button>
+<button class="text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:shadow-primary/40 transition-shadow bg-[#0088cc]" style="background-color: #0066FF; display: flex; align-items: center; justify-content: center; min-width: 40px; min-height: 40px;">
+<span class="material-symbols-outlined text-white">send</span>
+</button>
+</div>
+</footer>
+<!-- Bottom Nav Bar Component Styled for Dark Theme -->
+</body></html>

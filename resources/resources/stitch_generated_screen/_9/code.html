@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0052D9", // Using a corporate blue for MightYoung
+                        "background-light": "#f8fafd",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Microsoft YaHei", "Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Microsoft YaHei', 'Public Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto shadow-xl bg-white dark:bg-slate-900">
+<!-- Top Navigation -->
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="text-slate-600 dark:text-slate-300 flex size-12 shrink-0 items-center cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-12">上报反馈</h2>
+</div>
+<!-- Success Animation/Illustration Area -->
+<div class="flex flex-col items-center justify-center py-12 px-6">
+<div class="size-24 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+<div class="size-16 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined !text-4xl">check_circle</span>
+</div>
+</div>
+<h1 class="text-slate-900 dark:text-white tracking-tight text-3xl font-bold leading-tight text-center pb-3">提交成功</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal leading-normal text-center max-w-[280px]">
+                您的报告已收到，系统正在核实处理中。
+            </p>
+</div>
+<!-- Hazard Summary Card -->
+<div class="px-6 py-4">
+<h3 class="text-slate-800 dark:text-slate-200 text-sm font-semibold uppercase tracking-wider mb-3">异常情况摘要</h3>
+<div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 rounded-xl p-4 flex gap-4">
+<div class="size-20 shrink-0 rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-700">
+<img alt="Hazard Thumbnail" class="w-full h-full object-cover" data-alt="Small thumbnail of a reported road hazard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPpYVfX567ky0XDXPdJeDeTv3kmhMxQodiRF1fxp_yuCTBsoX_dH97l-sGi4s3vAv4qNcMJpO7IuMZzIbsmu6PWsP0ohlNFLEDF68_VOci8UNFXQtWWy9Fg_4nVn2W5XuDpNx_6Fsu1XzLLrAACrqS3CZ279r8Nd48iVyRDnwdbV-54Mi6hK2okAOAv4XlC8Wn2Ycaw-Di4PXsNCT58pYlfE9HfbAmwRS7GUEcUxRXt1Tu7nuMZVeg42FJVm8rfYZiGW6LW02pINo"/>
+</div>
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-primary text-sm">warning</span>
+<span class="text-slate-900 dark:text-white font-bold">路面损毁</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-xs">location_on</span>
+<span>北京市朝阳区建国路 88 号</span>
+</div>
+<div class="mt-1 text-xs text-slate-400 dark:text-slate-500">
+                        上报时间：2023-11-24 14:20
+                    </div>
+</div>
+</div>
+</div>
+<!-- Info Section -->
+<div class="px-6 py-4 flex-1">
+<div class="flex items-start gap-3 p-4 bg-primary/5 rounded-lg border border-primary/10">
+<span class="material-symbols-outlined text-primary">info</span>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    感谢您的贡献！MightYoung 团队将在 24 小时内完成初步审核。您可以在“我的报告”中查看后续进度。
+                </p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="p-6 space-y-3 mt-auto">
+<button class="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-colors shadow-lg shadow-primary/20">
+                回到首页
+            </button>
+<button class="w-full py-4 bg-transparent border-2 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-bold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                查看报告详情
+            </button>
+</div>
+<!-- Decorative element at bottom -->
+<div class="h-1.5 w-32 bg-slate-200 dark:bg-slate-700 rounded-full mx-auto mb-2"></div>
+</div>
+</body></html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6",
+                        "background-light": "#f8f9fa",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Microsoft YaHei", "Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Microsoft YaHei', 'Public Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+<div class="relative flex h-screen w-full flex-col overflow-hidden max-w-md mx-auto border-x border-slate-200 dark:border-slate-800">
+<!-- Top Nav Bar -->
+<div class="flex items-center bg-white dark:bg-slate-900 p-4 border-b border-slate-200 dark:border-slate-800 shrink-0">
+<div class="text-slate-600 dark:text-slate-300 flex size-10 shrink-0 items-center justify-start">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight flex-1 text-center">AI 助手</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="flex items-center justify-center text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+<!-- Chat Content Area -->
+<div class="flex-1 overflow-y-auto p-4 space-y-6">
+<!-- AI Message -->
+<div class="flex items-start gap-3">
+<div class="bg-primary/10 flex items-center justify-center rounded-full w-10 h-10 shrink-0">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+</div>
+<div class="flex flex-1 flex-col gap-1 items-start">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium ml-1">AI 助手</p>
+<div class="text-base font-normal leading-normal max-w-[85%] rounded-2xl rounded-tl-none px-4 py-3 bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700">
+                    为您查询到以下台账信息：
+                </div>
+</div>
+</div>
+<!-- Detail Card -->
+<div class="ml-12 @container">
+<div class="flex flex-col items-stretch justify-start rounded-2xl shadow-md bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 overflow-hidden">
+<div class="w-full bg-slate-200 dark:bg-slate-700 aspect-video relative" data-alt="Industrial air compressor machine in a factory" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB37-MOCxgD0iJqq_q1TyO0ggnziaUUEHn_0bdrMCJ0KBC6h-CF5c2xXoKY4xqx2ErFmhsjNUEklVql6jAnw54avaWYVWYcgCvT1l6X8pzUbvbzvG3Be133__pfXYgQfxEwIpGx5OFIvXUEwskZuQ8X4n0uTD1FSTM_uGRimY_NId6IxweBDTgfCgs8CdSs2EGlT3JaMC-b6w05bfwTXMmhWjVwdRQZwpCRgc7OncoMxctxw65GzKikxwpVjIcSgrG43O3IVfpDc-c"); background-size: cover; background-position: center;'>
+<div class="absolute top-3 left-3 px-2 py-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur rounded-lg flex items-center gap-1.5 shadow-sm">
+<span class="flex h-2 w-2 rounded-full bg-green-500"></span>
+<span class="text-xs font-semibold text-slate-700 dark:text-slate-200">运行中</span>
+</div>
+</div>
+<div class="flex w-full flex-col gap-3 p-4">
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight">空气压缩机 MTR-09</h3>
+</div>
+<div class="space-y-1.5">
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>所属区域：B3 生产车间</span>
+</div>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm">history</span>
+<span>最后检查：2026-05-20 14:30</span>
+</div>
+</div>
+<div class="flex gap-2 pt-2 border-t border-slate-50 dark:border-slate-700 mt-1">
+<button class="flex-1 flex cursor-pointer items-center justify-center rounded-xl h-10 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-bold transition-colors hover:bg-slate-200 dark:hover:bg-slate-600">
+                            查看详情
+                        </button>
+<button class="flex-1 flex cursor-pointer items-center justify-center rounded-xl h-10 bg-primary text-white text-sm font-bold shadow-sm shadow-primary/20 hover:bg-primary/90">
+                            开始巡检
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- WeChat Style Input Bar -->
+<div class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 p-3 pb-8 flex items-center gap-3">
+<button class="text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<div class="flex-1">
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-lg py-2 px-3 text-sm focus:ring-1 focus:ring-primary" placeholder="输入您的问题..." type="text"/>
+</div>
+<button class="text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined">mood</span>
+</button>
+<button class="text-primary">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+</div>
+<!-- Bottom Navigation Bar (Optional Context) -->
+<div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pb-4 pt-2 shrink-0">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<div class="flex h-6 items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">chat_bubble</span>
+</div>
+<p class="text-[10px] font-medium leading-normal">对话</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 dark:text-slate-500" href="#">
+<div class="flex h-6 items-center justify-center">
+<span class="material-symbols-outlined">search</span>
+</div>
+<p class="text-[10px] font-medium leading-normal">查询</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 dark:text-slate-500" href="#">
+<div class="flex h-6 items-center justify-center">
+<span class="material-symbols-outlined">person</span>
+</div>
+<p class="text-[10px] font-medium leading-normal">我的</p>
+</a>
+</div>
+</div>
+</body></html>

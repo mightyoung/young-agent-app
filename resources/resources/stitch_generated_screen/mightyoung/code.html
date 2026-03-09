@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MightYoung - Splash Screen</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-animations">
+    @keyframes button-reveal {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-buttons {
+      animation: button-reveal 0.8s ease-out forwards;
+    }
+
+    .minimal-button {
+      background: #f8f9fa;
+      border: 1px solid #e2e8f0;
+      color: #000000;
+      transition: all 0.2s ease;
+    }
+
+    .minimal-button:hover {
+      background: #edf2f7;
+      border-color: #cbd5e0;
+    }
+  </style>
+</head>
+<body class="bg-white text-black font-sans antialiased overflow-hidden m-0 p-0 h-screen w-screen flex flex-col justify-center items-center" style="font-family: 'Microsoft YaHei', sans-serif;">
+<!-- BEGIN: Fluid Background Background -->
+<!-- END: Fluid Background Background -->
+<!-- BEGIN: Main Splash Content -->
+<main class="relative z-10 flex flex-col items-center justify-center h-full w-full px-8 text-center" data-purpose="splash-content">
+<!-- BEGIN: Logo Section -->
+<div class="mb-12 animate-reveal">
+<h1 class="text-6xl font-bold tracking-tight text-black mb-2" style="">五八安易</h1>
+<div class="h-[1px] w-12 bg-zinc-200 mx-auto" style="background-color: #0066FF;"></div>
+</div>
+<!-- END: Logo Section -->
+<!-- BEGIN: Tagline Section -->
+<div class="animate-reveal">
+<p class="text-sm font-light text-zinc-600 tracking-[0.2em] uppercase mb-8" style="">你身边的安全助手</p>
+<!-- Visual indicator of "flowing" progress -->
+<div class="flex items-center justify-center gap-1.5 h-1">
+<div class="w-1.5 h-1.5 rounded-full bg-zinc-400" style="background-color: #0066FF;"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-zinc-300" style="animation-delay: 0.2s;"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-zinc-200" style="animation-delay: 0.4s;"></div>
+</div>
+</div>
+<div class="mt-20 flex flex-col sm:flex-row gap-4 w-full max-w-xs sm:max-w-md animate-buttons">
+<button class="minimal-button flex-1 py-4 px-6 rounded-2xl font-medium flex items-center justify-center gap-2" style="background-color: #0066FF; color: #ffffff; border: none; box-shadow: 0 4px 14px 0 rgba(0, 102, 255, 0.25);">
+<span class="material-symbols-outlined text-xl" style="">photo_camera</span>
+    随手拍
+  </button>
+<button class="minimal-button flex-1 py-4 px-6 rounded-2xl font-medium flex items-center justify-center gap-2" style="background-color: #ffffff; color: #0066FF; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+<span class="material-symbols-outlined text-xl" style="">magic_button</span>
+    智能助手
+  </button>
+</div>
+<!-- END: Tagline Section -->
+</main>
+<!-- END: Main Splash Content -->
+<!-- BEGIN: Footer Branding -->
+<footer class="fixed z-10 w-full text-center animate-reveal bottom-6" data-purpose="footer-branding">
+<p class="text-[10px] text-zinc-400 tracking-widest uppercase" style="">
+      Powered by MightYoung</p>
+</footer>
+<!-- END: Footer Branding -->
+<!-- BEGIN: Particle Logic -->
+<!-- END: Particle Logic -->
+</body></html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en"><head><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>MightYoung - Splash Screen</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-animations">
+    @keyframes fluid-flow {
+      0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.1; }
+      50% { transform: translateY(-20px) scale(1.1) rotate(5deg); opacity: 0.3; }
+      100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.1; }
+    }
+
+    @keyframes logo-reveal {
+      0% { opacity: 0; transform: scale(0.95); filter: blur(20px); }
+      40% { opacity: 0.3; filter: blur(10px); }
+      100% { opacity: 1; transform: scale(1); filter: blur(0); }
+    }
+
+    @keyframes button-reveal {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fluid {
+      animation: fluid-flow 10s ease-in-out infinite;
+    }
+
+    .animate-reveal {
+      animation: logo-reveal 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .animate-buttons {
+      animation: button-reveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Custom mesh gradient background */
+    .bg-mesh {
+      background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%);
+      overflow: hidden;
+    }
+
+    .glow-blob {
+      filter: blur(100px);
+      position: absolute;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .glass-button {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .glass-button:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="bg-black text-white font-sans antialiased overflow-hidden m-0 p-0 h-screen w-screen flex flex-col justify-center items-center">
+<!-- BEGIN: Fluid Background Background -->
+<section class="fixed inset-0 bg-mesh z-0 pointer-events-none" data-purpose="atmospheric-background" id="background-container">
+<!-- Animated fluid light blobs -->
+<div class="glow-blob w-[300px] h-[300px] bg-blue-900/20 top-[-50px] left-[-50px] animate-fluid"></div>
+<div class="glow-blob w-[400px] h-[400px] bg-purple-900/15 bottom-[-100px] right-[-50px] animate-fluid" style="animation-delay: -2s;"></div>
+<div class="glow-blob w-[250px] h-[250px] bg-indigo-800/20 top-1/4 right-1/4 animate-fluid" style="animation-delay: -4s;"></div>
+<!-- Canvas for particle "data flow" effect -->
+<canvas class="absolute inset-0 w-full h-full opacity-40" height="884" id="particleCanvas" width="390"></canvas>
+</section>
+<!-- END: Fluid Background Background -->
+<!-- BEGIN: Main Splash Content -->
+<main class="relative z-10 flex flex-col items-center justify-center h-full w-full px-8 text-center" data-purpose="splash-content">
+<!-- BEGIN: Logo Section -->
+<div class="mb-12 animate-reveal" style="animation-delay: 0.5s;">
+<h1 class="text-6xl font-bold tracking-tight text-white mb-2" style="">五八安易</h1>
+<div class="h-[1px] w-12 bg-gradient-to-r from-transparent via-indigo-500 to-transparent mx-auto"></div>
+</div>
+<!-- END: Logo Section -->
+<!-- BEGIN: Tagline Section -->
+<div class="animate-reveal" style="animation-delay: 1.2s;">
+<p class="text-sm font-light text-zinc-400 tracking-[0.2em] uppercase mb-8" style="">你身边的安全助手</p>
+<!-- Visual indicator of "flowing" progress -->
+<div class="flex items-center justify-center gap-1.5 h-1">
+<div class="w-1.5 h-1.5 rounded-full bg-indigo-500/50 animate-pulse"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-indigo-500/30 animate-pulse" style="animation-delay: 0.2s;"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-indigo-500/10 animate-pulse" style="animation-delay: 0.4s;"></div>
+</div>
+</div>
+<div class="mt-20 flex flex-col sm:flex-row gap-4 w-full max-w-xs sm:max-w-md animate-buttons opacity-0" style="animation-delay: 2s;">
+<button class="glass-button flex-1 py-4 px-6 rounded-2xl text-white font-medium flex items-center justify-center gap-2" style="">
+<span class="material-symbols-outlined text-xl" style="">photo_camera</span>
+    随手拍
+  </button>
+<button class="glass-button flex-1 py-4 px-6 rounded-2xl text-white font-medium flex items-center justify-center gap-2" style="">
+<span class="material-symbols-outlined text-xl" style="">magic_button</span>
+    智能助手
+  </button>
+</div>
+<!-- END: Tagline Section -->
+</main>
+<!-- END: Main Splash Content -->
+<!-- BEGIN: Footer Branding -->
+<footer class="fixed z-10 w-full text-center animate-reveal bottom-6" data-purpose="footer-branding" style="animation-delay: 1.8s;">
+<p class="text-[10px] text-zinc-600 tracking-widest uppercase" style="">
+      Powered by MightYoung</p>
+</footer>
+<!-- END: Footer Branding -->
+<!-- BEGIN: Particle Logic -->
+<script data-purpose="particle-animation">
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    const particleCount = 40;
+
+    function initCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.fillStyle = `rgba(147, 197, 253, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function createParticles() {
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', initCanvas);
+    
+    initCanvas();
+    createParticles();
+    animate();
+  </script>
+<!-- END: Particle Logic -->
+</body></html>

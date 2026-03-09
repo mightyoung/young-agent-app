@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0088cc",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#000000",
+                    },
+                    fontFamily: {
+                        "display": ["Microsoft YaHei", "PingFang SC", "Heiti SC", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+        .glass-input {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: #0088cc;
+            box-shadow: 0 0 15px rgba(0, 136, 204, 0.3);
+            outline: none;
+        }
+        .motion-blur-text {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 2px 0 5px rgba(255, 255, 255, 0.2), -2px 0 5px rgba(255, 255, 255, 0.2);
+        }
+        .noir-gradient {
+            background: radial-gradient(circle at center, #111111 0%, #000000 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden noir-gradient">
+<!-- Header / Back Navigation -->
+<div class="flex items-center p-4 justify-between">
+<button class="text-slate-100 flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex-1"></div>
+</div>
+<main class="flex-1 flex flex-col items-center justify-center px-6 w-full max-w-md mx-auto">
+<!-- Logo Section with Motion Blur Effect -->
+<div class="mb-12 text-center">
+<div class="inline-block relative">
+<h1 class="text-white tracking-[0.2em] text-5xl font-bold uppercase motion-blur-text">五八安易</h1>
+<div class="absolute -inset-1 bg-white/5 blur-xl rounded-full"></div>
+</div>
+<p class="text-slate-500 mt-4 text-xs tracking-[0.3em] uppercase">Tech-Industrial System v4.1</p>
+</div>
+<!-- Login Form -->
+<div class="w-full space-y-6">
+<div class="space-y-2">
+<label class="text-slate-400 text-xs font-semibold tracking-widest uppercase ml-1">Identity</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xl">person</span>
+<input class="glass-input w-full h-14 pl-12 pr-4 rounded-xl text-white placeholder:text-slate-600 font-light" placeholder="用户名或手机号" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-slate-400 text-xs font-semibold tracking-widest uppercase ml-1">Credential</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xl">lock</span>
+<input class="glass-input w-full h-14 pl-12 pr-12 rounded-xl text-white placeholder:text-slate-600 font-light" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(0,136,204,0.4)] active:scale-[0.98] uppercase tracking-widest text-sm">登录</button>
+</div>
+<!-- Footer Links -->
+<div class="flex flex-col items-center gap-4 pt-6">
+<a class="text-slate-500 hover:text-slate-300 text-sm transition-colors font-medium" href="#">忘记密码?</a>
+<div class="flex items-center gap-2">
+<span class="text-slate-600 text-sm">新用户?</span>
+<a class="text-primary hover:underline text-sm font-bold" href="#">立即注册</a>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Contextual) -->
+</div>
+<!-- Decorative Industrial Element -->
+<div class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-30"></div>
+<div class="fixed bottom-0 left-0 w-full h-[1px] bg-white/5"></div>
+</body></html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "system-ui", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Smooth transitions for the details element */
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary span.expand-icon {
+            transform: rotate(180deg);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(59, 130, 246, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full max-w-md mx-auto flex-col bg-white dark:bg-slate-900 shadow-xl overflow-x-hidden">
+<!-- Header -->
+<div class="flex items-center bg-white dark:bg-slate-900 p-4 sticky top-0 z-10 border-b border-slate-100 dark:border-slate-800 justify-between">
+<div class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 px-4">设备详情</h2>
+<div class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined">more_vert</span>
+</div>
+</div>
+<!-- Device Info Card -->
+<div class="flex p-4 @container">
+<div class="flex w-full flex-col gap-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+<div class="flex gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl h-24 w-24 shadow-sm" data-alt="Professional network switch device in data center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBimfhoD-BNb30ooFqttCJPPpwOUQp_CwFXeBrAE-Nhs5PFmmYgx2p5XLyCS60w8CTT32LzFc0EIenk0ZHNlK7rauleugB2W3oNV4CpeiLyoy-Gl9to01wAt-wwxqSLWF_bTjEg65JnQsFx_hJHa_SW2aFlcQrAGpY70_s8v9cKc-2Bi7kN7EENjuoUOyp_tJ8_0pHJuQe_r77WAjN0SGt8tC3ik9aGtxtxcSG-1hAIITm8zfAfqoGh76F71aTJ8b5tuKmTPuCCm9s");'></div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-white text-xl font-bold leading-tight">核心交换机-01</p>
+<div class="mt-1 flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal">运行中 | HW-S5700</p>
+</div>
+<p class="text-primary text-sm font-medium mt-1">编号: EQ-2023102401</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Section Title -->
+<div class="flex items-center justify-between px-4 pb-3 pt-5">
+<h2 class="text-slate-900 dark:text-white text-[20px] font-bold leading-tight tracking-tight">巡检记录</h2>
+<button class="text-primary text-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                筛选
+            </button>
+</div>
+<!-- Inspection Records List -->
+<div class="flex flex-col p-4 gap-4">
+<!-- Record Item 1: Open State Example -->
+<details class="group flex flex-col rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm transition-all duration-300 ease-in-out" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-4 p-4 list-none">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">event_note</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white text-sm font-bold">定期季度巡检</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">2023年10月20日</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 expand-icon">expand_more</span>
+</summary>
+<div class="px-4 pb-4 border-t border-slate-50 dark:border-slate-700/50 pt-4 space-y-4 overflow-hidden">
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">巡检结果</p>
+<p class="text-sm font-medium text-green-600 dark:text-green-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                正常
+                            </p>
+</div>
+<div class="space-y-1">
+<p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">巡检人员</p>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-200">张三 (技术专家)</p>
+</div>
+<div class="space-y-1">
+<p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">巡检耗时</p>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-200">45分钟</p>
+</div>
+<div class="space-y-1">
+<p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">环境温度</p>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-200">22°C</p>
+</div>
+</div>
+<div class="space-y-2">
+<p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">现场照片</p>
+<div class="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
+<div class="h-16 w-16 rounded-lg bg-cover shrink-0 border border-slate-200 dark:border-slate-700" data-alt="Close up of ethernet cables connected to switch" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDttLEZyS_fjPbS7-e0sKZn8YCnCCsaDV7OGurlb-tdWArHcihN20h91UfeFYllr1CG6A96P5uo6dSZ7sj06gQ8-w1UayVUfC_ZGzt1YiBYjKu7bJr2QOrKdT_whGjZNw31Cg_bP-RQdCwqZumnMOWyvgx25Kjb38f8Ho7UGgpZEYjczrBxpipEVG6hcnABRGkYVHTwwij8ZsGc_Ack55IMM52mAJwct7wNAEwBNqSt1EdUaFHPlUYq4gqTajKN84NqSCyOpuNeJ4E");'></div>
+<div class="h-16 w-16 rounded-lg bg-cover shrink-0 border border-slate-200 dark:border-slate-700" data-alt="Back panel of server rack cabling" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHd9sVopGuHryE7jhDtKZMXqH-Iwa7S6OB5b3BM5cTugJDBwFVe5X5rP8fb9Ai7WnB1Xjp5M9f8Fh6-KJIIVLcdVxnp0a-wamHRU1jD19t7hOueVWA09T5jdgZaKzXj7qOalQPT-xijhObkS5Fu-gfdKO89G6JaP1vNc6sX7DbDOVqqXRM5RIMnVE4WED7O3OI-9vcNrWyeMM1CErehvbi_6uOa0RvstAMeaUvsjEHSc6cy8ktIlHYe5jPtmt-mljc13Kh3wG2lVo");'></div>
+<div class="h-16 w-16 rounded-lg bg-cover shrink-0 border border-slate-200 dark:border-slate-700" data-alt="Circuit board close up component" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA91tpe4_moVurM8yyTB5WISdUhqQKDi_d8GDFY1KvUC6gNN9GsFS_78S4qe56jVLaDK5GXWU8kQRNYsQArCuBxR84uRDbbcDjMDWyC0a78R-Dnfx_VEo28J8btfOuU4r8ecEAd4gRQEb_aeXwUdtY3k1gZhNpJ1V9ww89b5tE0pToOJ1fqEoltJFNvbn3s8GWAToX0CUyr7d1iozxchLCmJeKCwKqeJk4DolMfz_sx90HqL8-oVNFWNBsR-21My-k7Hx4URbO9BAY");'></div>
+</div>
+</div>
+<div class="space-y-1">
+<p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">备注说明</p>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            设备运行平稳，风扇无异响，进风口已除尘。光模块功率在正常范围内。
+                        </p>
+</div>
+</div>
+</details>
+<!-- Record Item 2 -->
+<details class="group flex flex-col rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm transition-all duration-300">
+<summary class="flex cursor-pointer items-center justify-between gap-4 p-4 list-none">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white text-sm font-bold">例行月度维护</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">2023年09月20日</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 expand-icon">expand_more</span>
+</summary>
+<div class="px-4 pb-4 border-t border-slate-50 dark:border-slate-700/50 pt-4">
+<p class="text-sm text-slate-600 dark:text-slate-300">详情内容加载中...</p>
+</div>
+</details>
+<!-- Record Item 3 -->
+<details class="group flex flex-col rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm transition-all duration-300">
+<summary class="flex cursor-pointer items-center justify-between gap-4 p-4 list-none">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-red-500">
+<span class="material-symbols-outlined">report_problem</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white text-sm font-bold">突发故障排查</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">2023年08月15日</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform duration-300 expand-icon">expand_more</span>
+</summary>
+<div class="px-4 pb-4 border-t border-slate-50 dark:border-slate-700/50 pt-4">
+<p class="text-sm text-slate-600 dark:text-slate-300">详情内容加载中...</p>
+</div>
+</details>
+</div>
+<!-- Bottom Navigation Bar -->
+</div>
+</body></html>

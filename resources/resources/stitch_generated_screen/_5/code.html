@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0088cc',
+                        'background-light': '#f8fbfd',
+                        'background-dark': '#f8fbfd',
+                    },
+                    fontFamily: {
+                        'display': ['Microsoft YaHei', 'Public Sans', 'sans-serif']
+                    },
+                    borderRadius: {'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px'},
+                },
+            },
+        }</script>
+<style>
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .status-pass {
+            color: #07c160;
+            background: rgba(7, 193, 96, 0.1);
+            border: 1px solid rgba(7, 193, 96, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-dark font-display text-slate-100 min-h-screen bg-[#f8fbfd] text-slate-800">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex items-center bg-background-dark/80 backdrop-blur-md px-4 py-4 border-b border-white/10 bg-white/90 border-slate-200">
+<button class="hover:text-primary transition-colors flex items-center justify-center text-slate-900">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold ml-4 tracking-tight text-slate-900">检查详情</h1>
+<div class="ml-auto flex gap-3">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer">share</span>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer">more_vert</span>
+</div>
+</header>
+<main class="max-w-4xl mx-auto pb-12">
+<!-- Device Hero Section -->
+<div class="relative w-full h-64 @container">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="High-tech industrial drilling equipment in a dark factory setting" style="background-image: linear-gradient(to top, #f8fbfd 0%, transparent 100%), url('https://lh3.googleusercontent.com/aida-public/AB6AXuDLhmJqjvXJYdUwpyN9ApAbdvOwzpTCA9_3fL-oQAEIv_Bt38XCS0H4IBJIBnXuIQiy-B8HH3vTojhu4Gwi_VBKZLoUjAayo_ir0-Zrade-BniUUJwyw18OgYgOGL_TDEE4BTVZngYE2uvhcGgzQfeDIv2wBDDkns1RIUUAyZHUDZNWrz41lE5KeaGHQrzb08bP9HillosIO1SFeI1k6d-6PQb8-3bI-RbGWHjL1a2YKSjdr8sd04YE7UhDU7bEvM5dyYdkv2BvXQI')">
+</div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<div class="flex flex-col gap-1">
+<span class="text-primary text-xs font-bold tracking-widest uppercase">MightYoung 工业设备</span>
+<h2 class="text-3xl font-bold drop-shadow-md text-slate-900">Quantum Pulse Drill X-1</h2>
+<p class="font-mono text-slate-500">ID: #MY-9821</p>
+</div>
+</div>
+</div>
+<div class="px-4 space-y-6 -mt-4 relative z-10">
+<!-- Status Card -->
+<div class="glass-card rounded-xl p-5 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-slate-400 text-sm text-slate-500">当前检测结论</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-[#07c160]">check_circle</span>
+<span class="text-xl font-bold text-[#07c160]">状态：合格</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-slate-400 text-sm text-slate-500">置信度</span>
+<span class="text-primary font-bold">99.8%</span>
+</div>
+</div>
+<!-- Metadata Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="glass-card rounded-xl p-4 flex items-center gap-4">
+<div class="bg-primary/20 p-3 rounded-lg">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+</div>
+<div>
+<p class="text-slate-400 text-xs text-slate-500">检查时间</p>
+<p class="text-sm font-medium">2023-11-24 14:30</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-4 flex items-center gap-4">
+<div class="bg-primary/20 p-3 rounded-lg">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div>
+<p class="text-slate-400 text-xs text-slate-500">检查人员</p>
+<p class="text-sm font-medium">张建国 (Senior Inspector)</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-4 flex items-center gap-4">
+<div class="bg-primary/20 p-3 rounded-lg">
+<span class="material-symbols-outlined text-primary">location_on</span>
+</div>
+<div>
+<p class="text-slate-400 text-xs text-slate-500">检查地点</p>
+<p class="text-sm font-medium" data-location="Shenzhen High-Tech Park">深圳南山高新园区 B3</p>
+</div>
+</div>
+</div>
+<!-- Inspection Checklist Card -->
+<div class="glass-card rounded-xl overflow-hidden">
+<div class="bg-white/5 px-5 py-3 flex items-center justify-between border-b border-white/10 bg-slate-50/50 border-slate-100">
+<h3 class="font-bold flex items-center gap-2 text-slate-900">
+<span class="material-symbols-outlined text-primary text-lg">fact_check</span>
+                        检查详情项
+                    </h3>
+<span class="text-xs text-slate-400 text-slate-500">共 5 项</span>
+</div>
+<div class="divide-y divide-slate-100"><!-- Vibration Check -->
+<div class="px-5 py-5 space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-medium text-slate-700">振动检查</span>
+<span class="text-[#07c160] font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">task_alt</span> 正常
+        </span>
+</div>
+<div class="bg-slate-50 rounded-lg p-3 text-sm text-slate-600 border border-slate-100">
+<div class="flex items-center gap-3 mb-2 p-2 bg-primary/5 rounded-lg border border-primary/10 w-fit">
+<span class="material-symbols-outlined text-primary text-base">mic</span>
+<div class="flex items-end gap-0.5 h-4">
+<div class="w-0.5 bg-primary/40 h-2 rounded-full"></div>
+<div class="w-0.5 bg-primary h-4 rounded-full"></div>
+<div class="w-0.5 bg-primary/60 h-3 rounded-full"></div>
+</div>
+<span class="text-[10px] font-mono text-primary font-bold">0:04</span>
+</div>
+        运行声音清脆，无异常低频震动。
+    </div>
+<div class="flex gap-2 overflow-x-auto pb-1">
+<img class="w-16 h-16 rounded-lg object-cover border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8q8wEENg0xjZXUZP42HZJAke-x75AF95a5W9jYLQQhLTDyT6qeRi8XIFmgq7asKaFfcBdi3KoMryfEeuSFXW0cmVeTsTn-ff0y2HuMznWKw6sPgi4AO1SmUU7XVOpneGozFMp-1DZ09_PNF66umOX1r0xb_W7Ck0oxq0CEx-KabRd_ALPRkCdy8fO2VHLgGLPzbXnSsizJP07gVMbOBQRx6r48j5I2SALvd3o8qdiExLU-CGixLJXwTUVcZ78EXDPz5yfEeDi2lA"/>
+</div>
+</div>
+<!-- Temperature Measurement -->
+<div class="px-5 py-5 space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-medium text-slate-700">温度测量</span>
+<div class="text-right">
+<span class="font-medium">75°C</span>
+<span class="text-[#07c160] text-xs ml-2 bg-[#07c160]/10 px-2 py-0.5 rounded-full">合格</span>
+</div>
+</div>
+<div class="bg-slate-50 rounded-lg p-3 text-sm text-slate-600 border border-slate-100">
+        传感器读数稳定，处于正常工作区间。
+    </div>
+<div class="flex gap-2">
+<img class="w-16 h-16 rounded-lg object-cover border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu-e2_UjLVs6p_Zg0_N-llRVY_LGSoAogesRhdb9lSqQB852f2NxDWtEoBusSnXS_6BQWgczPYb3uFbosoF7BjuXyQtKwgyqDZSsyhW5ZLZFP6SYyqo862BO4N8MGKwNBEwWvAmDD3nrII4cq5tF56A5M2-PNXqI3ZF6HaofdHiW78_7QqLb4LkohLyRuSfA6FI0TDznZ3UZM56MoiVyaSqbt9GevK2BE_zg2LkgCX5flxraA_Lqp5m4X0wCfOE9FcqHWM7y_vqao"/>
+</div>
+</div>
+<!-- Lubrication Pressure -->
+<div class="px-5 py-5 space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-medium text-slate-700">润滑系统压力</span>
+<div class="text-right">
+<span class="font-medium">4.2 bar</span>
+<span class="text-[#07c160] text-xs ml-2 bg-[#07c160]/10 px-2 py-0.5 rounded-full">合格</span>
+</div>
+</div>
+<div class="bg-slate-50 rounded-lg p-3 text-sm text-slate-600 border border-slate-100 text-slate-400 italic">
+        未填写备注内容
+    </div>
+</div>
+<!-- Bolt Tightness -->
+<div class="px-5 py-5 space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-medium text-slate-700">螺栓紧固度</span>
+<span class="text-[#07c160] font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">task_alt</span> 已确认
+        </span>
+</div>
+<div class="flex gap-2">
+<img class="w-16 h-16 rounded-lg object-cover border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGAFBsw2nfuZgr63dwyO5m5OnAQVkaLdhEZXmAf_9UdRI3aPaH9n7UMxsLAYa8tV9mU5n6aHE5KRt4RmY8aqaxqbAdYoNA-yolsfMp_Hv62uTESsw0KUDwNqPMztczSDzmZMBPvIwL8AXQJ5jIoaVCl-ZE77gUTXD19T9-Pw-NBSgxKRPhX1sIkSHTItuNO-sf64_tOkFH2b_PjIFqMFXn2oCwWUUi1EINJ_NGJ_27k7bVhHpG5PtU1W1SHxpTgVBH0uSAqRbYJKs"/>
+</div>
+</div></div>
+</div>
+<!-- Remarks Section -->
+<!-- Attachments Section -->
+<!-- Footer Action Buttons (Not a persistent nav) -->
+<div class="pt-6 flex gap-4">
+<button class="flex-1 py-4 rounded-xl border border-white/10 glass-card text-slate-100 font-bold hover:bg-white/10 transition-all flex items-center justify-center gap-2 text-slate-700 border-slate-200">
+<span class="material-symbols-outlined">edit</span>
+                    编辑记录
+                </button>
+<button class="flex-1 py-4 rounded-xl bg-primary text-white font-bold hover:brightness-110 transition-all shadow-[0_0_20px_rgba(0,136,204,0.3)] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-white">print</span>
+                    导出报告
+                </button>
+</div>
+</div>
+</main>
+<div class="h-10"></div>
+</body></html>

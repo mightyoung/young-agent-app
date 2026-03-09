@@ -31,6 +31,7 @@ yarn-error.*
 *.pem
 
 # local env files
+.env
 .env*.local
 
 # typescript
@@ -41,3 +42,32 @@ app-example
 # generated native folders
 /ios
 /android
+.gitnexus
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Large binaries
+gradle-*.zip
+
+# Assets
+assets/
+# But keep images folder
+!assets/images/
+
+# Special files
+nul
+
+# Test results
+test-results/
+
+# Claude related
+.claude/
+.claude-flow/
+.swarm/
+
+# Playwright
+.playwright-mcp/

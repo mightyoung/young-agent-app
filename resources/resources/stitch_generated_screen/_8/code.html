@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0088cc", // Telegram Blue
+                        "background-light": "#f8fafd",
+                        "background-dark": "#1c242c",
+                    },
+                    fontFamily: {
+                        "display": ["Microsoft YaHei", "微软雅黑", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<!-- Header -->
+<header class="flex items-center bg-white dark:bg-slate-900 p-4 border-b border-slate-100 dark:border-slate-800 shrink-0">
+<button class="text-primary flex size-10 items-center justify-center rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[28px]">arrow_back</span>
+</button>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 ml-2">隐患随手拍</h2>
+</header>
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Image Section -->
+<div class="p-4">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-3">拍摄现场图片</p>
+<div class="grid grid-cols-3 gap-3">
+<div class="relative aspect-square">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover rounded-xl border border-slate-200 dark:border-slate-700" data-alt="Construction site safety hazard photo showing messy cables" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDAmiSc0t8pOdKkvFa94X9EmiKHHaiYn0Mp4KimuiyhzSZOEHg1WflFRBKvKaFxdLvlyQK-FWh1Qx-DX_ygDUDmC3oSz8Te7aZ4F1AXTP4V5lE75HU65mu4m_hVH52JZxGDz_ckv-dMS_oR7XQRpxG3MvkZM-_svkw-M-K3AfQ6VcHpf4ROOQ_k7bsBezNAMCbiwiwVJnXOmWIQIE47TtNc-hsiSqRNmMvVyWIizq-DqSAf509Ui3MnUfCrFHjVSyeKWpUw2nUWvoo");'>
+</div>
+<button class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 shadow-md">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<div class="flex flex-col items-center justify-center aspect-square bg-slate-100 dark:bg-slate-800 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-slate-400 text-3xl">add</span>
+<span class="text-xs text-slate-400 mt-1">添加更多</span>
+</div>
+</div>
+</div>
+<!-- Form Sections -->
+<div class="px-4 py-2 space-y-6">
+<!-- Location Field -->
+<div class="space-y-2">
+<label class="text-slate-700 dark:text-slate-300 text-sm font-semibold">发现地点</label>
+<div class="flex items-center bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus-within:border-primary transition-colors">
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder:text-slate-400 text-base" placeholder="请输入详细地址" type="text" value="深圳市南山区高新园区 B3"/>
+<span class="material-symbols-outlined text-primary ml-2 cursor-pointer" data-location="Shenzhen">location_on</span>
+</div>
+</div>
+<!-- Type Field -->
+<div class="space-y-2">
+<label class="text-slate-700 dark:text-slate-300 text-sm font-semibold">隐患类型</label>
+<div class="relative">
+<select class="w-full appearance-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:border-primary focus:ring-0 text-base">
+<option disabled="" value="">请选择隐患类型</option>
+<option value="fire">火灾安全隐患</option>
+<option selected="" value="electric">电力设施损坏</option>
+<option value="construction">违章建筑施工</option>
+<option value="other">其他环境安全</option>
+</select>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Description Preview / Placeholder Area -->
+<div class="space-y-2">
+<label class="text-slate-700 dark:text-slate-300 text-sm font-semibold">补充描述 (可选)</label>
+<div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 min-h-[100px] text-slate-400 text-sm">
+                        点击下方输入栏或语音按钮进行详细描述...
+                    </div>
+</div>
+</div>
+</main>
+<!-- Bottom Input Bar (WeChat/Telegram Style) -->
+<div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 px-3 py-3 flex items-center gap-3">
+<!-- Voice Toggle -->
+<button class="flex items-center justify-center size-10 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">mic</span>
+</button>
+<!-- Text Input -->
+<div class="flex-1 bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-2 flex items-center">
+<input class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white text-base py-1" placeholder="请输入隐患描述..." type="text"/>
+</div>
+<!-- Send Button (Telegram Style) -->
+<button class="flex items-center justify-center size-11 bg-primary text-white rounded-full shadow-lg shadow-primary/30 hover:bg-primary/90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[24px] ml-1">send</span>
+</button>
+</div>
+</div>
+</body></html>

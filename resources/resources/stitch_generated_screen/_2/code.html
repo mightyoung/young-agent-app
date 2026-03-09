@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0088cc",
+                        "tech-blue": "#0088cc",
+                        "success-green": "#07C160",
+                        "danger-red": "#ff4b2b",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0a0a0a",
+                    },
+                    fontFamily: {
+                        "display": ["Microsoft YaHei", "Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+        .sound-wave-bar {
+            @apply bg-primary rounded-full;
+            width: 4px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<!-- Background Content (Simulating SCREEN_8) -->
+<div class="absolute inset-0 z-0 flex flex-col opacity-40">
+<!-- Header -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 justify-between border-b border-slate-200 dark:border-slate-800">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">arrow_back</span>
+<h2 class="text-lg font-bold flex-1 text-center">MightYoung</h2>
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">more_horiz</span>
+</div>
+<!-- Chat Content Placeholder -->
+<div class="flex-1 p-4 space-y-4 overflow-y-auto">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-slate-300 dark:bg-slate-700"></div>
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg rounded-tl-none shadow-sm max-w-[70%]">
+<p class="text-sm">Hey, are we still meeting later for the session?</p>
+</div>
+</div>
+<div class="flex items-start gap-3 flex-row-reverse">
+<div class="w-10 h-10 rounded-lg bg-primary"></div>
+<div class="bg-primary/20 dark:bg-primary/40 p-3 rounded-lg rounded-tr-none shadow-sm max-w-[70%]">
+<p class="text-sm">Yes! I'll be there in 10 minutes. Just sending a voice note now.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-slate-300 dark:bg-slate-700"></div>
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg rounded-tl-none shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">volume_up</span>
+<div class="w-24 h-2 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+<p class="text-xs text-slate-500">4"</p>
+</div>
+</div>
+</div>
+<!-- Fake Input Area -->
+<div class="p-4 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-500">keyboard_voice</span>
+<div class="flex-1 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg"></div>
+<span class="material-symbols-outlined text-slate-500">add_circle</span>
+</div>
+</div>
+<!-- Dimmed Overlay -->
+<div class="absolute inset-0 z-10 bg-[#0a0a0a]/90 backdrop-blur-md flex flex-col items-center justify-center" style="background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px);"><!-- Center Visualizer Area -->
+<div class="flex flex-col items-center mt-24 mb-auto">
+<!-- Microphone Icon -->
+<div class="w-36 h-36 rounded-full bg-tech-blue flex items-center justify-center shadow-2xl shadow-tech-blue/40 mb-8 border-4 border-white/10">
+<span class="material-symbols-outlined text-white text-7xl">mic</span>
+</div>
+<!-- Waveform Visualizer -->
+<div class="flex items-center gap-1.5 h-16 mb-8">
+<div class="w-1.5 bg-white/40 h-4 rounded-full"></div>
+<div class="w-1.5 bg-tech-blue h-10 rounded-full"></div>
+<div class="w-1.5 bg-white h-14 rounded-full"></div>
+<div class="w-1.5 bg-tech-blue h-12 rounded-full"></div>
+<div class="w-1.5 bg-white h-8 rounded-full"></div>
+<div class="w-1.5 bg-tech-blue h-14 rounded-full"></div>
+<div class="w-1.5 bg-white/60 h-10 rounded-full"></div>
+<div class="w-1.5 bg-tech-blue h-6 rounded-full"></div>
+</div>
+<p class="text-white text-xl font-medium" style="font-family: 'Microsoft YaHei', sans-serif;">正在录音...</p>
+</div>
+<!-- Action Options (Cancel/Translate) -->
+<div class="flex justify-between w-full px-12 mb-12">
+<div class="flex flex-col items-center gap-3">
+<div class="w-16 h-16 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">close</span>
+</div>
+<span class="text-white/60 text-xs" style="font-family: 'Microsoft YaHei', sans-serif;">取消</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="w-16 h-16 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">translate</span>
+</div>
+<span class="text-white/60 text-xs" style="font-family: 'Microsoft YaHei', sans-serif;">转文字</span>
+</div>
+</div>
+<!-- Slide Up Text -->
+<div class="text-center mb-8">
+<p class="text-white/40 text-sm" style="font-family: 'Microsoft YaHei', sans-serif;">上滑取消或转文字</p>
+</div>
+<!-- Bottom Input Bar & Base -->
+<div class="relative w-full">
+<!-- Input Bar -->
+<div class="relative z-20 mx-4 mb-10 bg-black/30 backdrop-blur-xl border border-white/10 rounded-full flex items-center p-1 pl-4">
+<button class="text-tech-blue p-2">
+<span class="material-symbols-outlined">keyboard</span>
+</button>
+<div class="flex-1 text-center text-white text-lg font-medium" style="font-family: 'Microsoft YaHei', sans-serif;">松开 发送</div>
+<button class="text-white/60 p-2">
+<span class="material-symbols-outlined">face</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-tech-blue flex items-center justify-center">
+<span class="material-symbols-outlined text-white">send</span>
+</button>
+</div>
+<!-- Gray Elliptical Base -->
+<div class="absolute bottom-[-100px] left-1/2 -translate-x-1/2 w-[140%] h-[300px] bg-[#c8c8c8] rounded-[50%] z-10 flex flex-col items-center pt-8">
+<span class="material-symbols-outlined text-slate-500 text-4xl">settings_voice</span>
+<div class="mt-4">
+<p class="text-slate-400 text-[10px] uppercase tracking-[0.3em] font-mono">系统安全连接已建立</p>
+</div>
+</div>
+</div></div>
+<!-- Hidden Bottom Nav for layout structure -->
+</div>
+</body></html>

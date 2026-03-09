@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0088cc", // Telegram Blue for High-tech Noir feel
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#121212", // Deeper Noir
+                        "noir-card": "#1e1e1e",
+                        "accent-pass": "#00e676",
+                        "accent-fail": "#ff5252"
+                    },
+                    fontFamily: {
+                        "display": ["'Microsoft YaHei'", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Microsoft YaHei', 'Public Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 p-4 justify-between">
+<div class="flex items-center gap-3">
+<button class="text-slate-900 dark:text-slate-100 flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">检查历史</h2>
+</div>
+</header>
+<!-- Status Tabs -->
+<nav class="bg-white dark:bg-background-dark sticky top-[73px] z-40">
+<div class="flex border-b border-slate-200 dark:border-slate-800 px-4 gap-8">
+<a class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-3 pt-4" href="#">
+<p class="text-sm font-bold leading-normal tracking-wide">全部</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-4 hover:text-primary transition-colors" href="#">
+<p class="text-sm font-bold leading-normal tracking-wide">合格</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-4 hover:text-primary transition-colors" href="#">
+<p class="text-sm font-bold leading-normal tracking-wide">不合格</p>
+</a>
+</div>
+</nav>
+<!-- Search & Filter Bar -->
+<div class="p-4">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-slate-400">search</span>
+<input class="w-full bg-slate-100 dark:bg-noir-card border-none rounded-xl py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary text-sm" placeholder="搜索设备或ID..." type="text"/>
+</div>
+</div>
+<!-- Inspection List -->
+<main class="flex-1 px-4 space-y-4 pb-8">
+<!-- Entry 1: Passed -->
+<div class="group flex items-stretch justify-between gap-4 rounded-xl bg-white dark:bg-noir-card p-4 shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all">
+<div class="flex flex-[2_2_0px] flex-col justify-between">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-black tracking-widest text-accent-pass bg-accent-pass/10 px-2 py-0.5 rounded">合格</span>
+<span class="text-xs text-slate-400 font-medium">#MY-9821</span>
+</div>
+<p class="text-slate-900 dark:text-white text-lg font-bold leading-tight mt-1">Quantum Pulse Drill X-1</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal">10月 24, 2023 • 14:30 • 技术员: Aris Thorne</p>
+</div>
+<button class="mt-4 flex items-center justify-center rounded-lg h-9 px-4 bg-primary text-white gap-2 text-sm font-bold hover:bg-primary/90 transition-colors w-fit">
+<span>查看报告</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<div class="w-24 h-24 sm:w-32 sm:h-auto bg-center bg-no-repeat bg-cover rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800" data-alt="Industrial blue precision drilling machinery equipment" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBDzHQX8fKKe41FQJdNdTdBirn2-wvXYTOWnte5zheov9IKxqBVC7kjsnJpbLe3p4n3yrptph2j4g0fBsUYFSKI0Ffb3WuoY1QzumqQjf7D-vVwh45Q-hpfFul8C6DqFh_OXRcZHxP1p4c3Zydv4xg66a2W3ekcL5MWbwjj-EPTSolj-klAqS-aysGTYBgCu4SIKTeT1S7tyTQWqv51rKfkOJkQCdvP-6Hercs-2JIGaeF2WrNB4Oqtxl8oR5J-v7VWmvhBVRZkkms");'>
+</div>
+</div>
+<!-- Entry 2: Failed -->
+<div class="group flex items-stretch justify-between gap-4 rounded-xl bg-white dark:bg-noir-card p-4 shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all">
+<div class="flex flex-[2_2_0px] flex-col justify-between">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-black tracking-widest text-accent-fail bg-accent-fail/10 px-2 py-0.5 rounded">不合格</span>
+<span class="text-xs text-slate-400 font-medium">#MY-4402</span>
+</div>
+<p class="text-slate-900 dark:text-white text-lg font-bold leading-tight mt-1">Hydraulic Press Alpha-7</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal">10月 22, 2023 • 09:15 • 技术员: Sarah Chen</p>
+</div>
+<button class="mt-4 flex items-center justify-center rounded-lg h-9 px-4 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-white gap-2 text-sm font-bold hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors w-fit">
+<span>处理问题</span>
+<span class="material-symbols-outlined text-sm">build</span>
+</button>
+</div>
+<div class="w-24 h-24 sm:w-32 sm:h-auto bg-center bg-no-repeat bg-cover rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800" data-alt="Heavy duty industrial hydraulic press machine" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDql4T0EtIL6SMtD9yi4uevx8kD7m5MvKJ4y2UQ_fzxW2Sf8UuhPXvsdwhzulPT4Ul11ONipsTPoYVjnaFKI0JOnxzynsbXcp9Wjg05GDXiveRayuS0-nAAJeNeJLn9ldxg4R8EIBjywUkEUoKadU_A_alPaOeqehRfuh0L32cTkRNN3KHn3TmwMb0knFkKRRp-2dZhQel5XVKNVhMUXtL0V-DfCcXC_13qBI1id7KZ7jOttFePAWtIznhfY2vewLmhfeTlLAyyxvg");'>
+</div>
+</div>
+<!-- Entry 3: Passed -->
+<div class="group flex items-stretch justify-between gap-4 rounded-xl bg-white dark:bg-noir-card p-4 shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-all">
+<div class="flex flex-[2_2_0px] flex-col justify-between">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-black tracking-widest text-accent-pass bg-accent-pass/10 px-2 py-0.5 rounded">合格</span>
+<span class="text-xs text-slate-400 font-medium">#MY-1120</span>
+</div>
+<p class="text-slate-900 dark:text-white text-lg font-bold leading-tight mt-1">Laser Cutter V3</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal">10月 20, 2023 • 16:45 • 技术员: Aris Thorne</p>
+</div>
+<button class="mt-4 flex items-center justify-center rounded-lg h-9 px-4 bg-primary text-white gap-2 text-sm font-bold hover:bg-primary/90 transition-colors w-fit">
+<span>查看报告</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<div class="w-24 h-24 sm:w-32 sm:h-auto bg-center bg-no-repeat bg-cover rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800" data-alt="High tech laser cutting machine workshop" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0RoTGcg09nDgAutKUiA0e4XZmzocbBnjJmFRFHvhqn0_S2dlo4bylrWMt37wEQXfj6vGdgQJ-w6nCb_UPoMxmkW7CGY8o0HRwrWjoDjV9SlCw8g2uH5NnVuwxrQ5lg7BTKh4ZLQxZ_4ueuByMhWxOX6j9jnZKwwcoOZGMX4YqYda66nYM-IcElGdD11tVT2wGrjeKfjcEl9ytmzS6hv8T2k3UWFy4JoZ0ir3KBAmeAM4xG7A7ZCcAILlzjsE2LA3IiCmuKAh47Ns");'>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+</div>
+</body></html>
