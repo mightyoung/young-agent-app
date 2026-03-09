@@ -9,7 +9,7 @@
  * stream.done();
  */
 
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 // ===== 类型定义 =====
 
@@ -75,12 +75,6 @@ export function createStreamableValue<T>(
   let isDone = false;
   let errorValue: Error | null = null;
   const subscribers = new Set<(update: StreamUpdate<T>) => void>();
-
-  // 添加订阅者
-  const subscribe = (callback: (update: StreamUpdate<T>) => void) => {
-    subscribers.add(callback);
-    return () => subscribers.delete(callback);
-  };
 
   // 通知所有订阅者
   const notify = (update: StreamUpdate<T>) => {
@@ -159,7 +153,6 @@ export function createStreamableValue<T>(
  */
 export function useStreamableValue<T>(stream: StreamableValueApi<T>): T | undefined {
   const [value, setValue] = useState<T | undefined>(stream.getValue());
-  const [loading, setLoading] = useState(stream.isLoading);
 
   useEffect(() => {
     const unsubscribe = stream.update((update) => {

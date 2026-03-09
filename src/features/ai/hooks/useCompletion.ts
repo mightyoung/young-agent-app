@@ -12,7 +12,7 @@
  * await submit('写一首关于春天的诗');
  */
 
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { aiService } from '../services/aiService';
 
 // ============================================

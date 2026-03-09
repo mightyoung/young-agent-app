@@ -106,6 +106,7 @@ export type AITabScreenProps<T extends keyof AITabParamList> =
 
 // Helper to declare global types
 declare global {
+   
   namespace ReactNavigation {
     interface RootParamList extends RootStackParamList {}
   }

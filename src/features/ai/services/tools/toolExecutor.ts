@@ -222,14 +222,14 @@ class EnhancedToolExecutor implements ToolExecutor {
   /**
    * 获取 LLM 格式的工具定义
    */
-  getToolsForLLM(): Array<{
+  getToolsForLLM(): {
     type: 'function';
     function: {
       name: string;
       description: string;
       parameters: Record<string, unknown>;
     };
-  }> {
+  }[] {
     return this.getAllTools().map((tool) => ({
       type: 'function' as const,
       function: {

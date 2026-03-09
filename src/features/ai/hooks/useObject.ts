@@ -15,7 +15,7 @@
  * await submit('请告诉我你的名字和年龄');
  */
 
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { z, ZodSchema, ZodError } from 'zod';
 import { aiService } from '../services/aiService';
 

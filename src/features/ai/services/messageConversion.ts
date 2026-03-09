@@ -95,12 +95,12 @@ export function serviceToChatMessage(messages: Message[]): ChatMessage[] {
 export function toOpenAIMessages(
   messages: UIMessage[],
   options: ConvertOptions = {}
-): Array<{
+): {
   role: 'user' | 'assistant' | 'system';
-  content: string | Array<{ type: string; text?: string; image_url?: string }>;
+  content: string | { type: string; text?: string; image_url?: string }[];
   name?: string;
   tool_call_id?: string;
-}> {
+}[] {
   const { includeThinking = false } = options;
 
   return messages
@@ -144,14 +144,14 @@ export function toOpenAIMessages(
 export function toAnthropicMessages(
   messages: UIMessage[],
   options: ConvertOptions = {}
-): Array<{
+): {
   role: 'user' | 'assistant';
-  content: string | Array<{ type: string; text: string }>;
-}> {
+  content: string | { type: string; text: string }[];
+}[] {
   const { includeThinking = false } = options;
 
   // Anthropic 不支持 system 角色，需要转换为 user 消息
-  const converted: Array<{ role: 'user' | 'assistant'; content: string | Array<{ type: string; text: string }> }> = [];
+  const converted: { role: 'user' | 'assistant'; content: string | { type: string; text: string }[] }[] = [];
 
   for (const msg of messages) {
     if (msg.role === 'tool' && msg.toolResults) {
