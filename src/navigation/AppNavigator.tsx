@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAuthStore } from '../features/auth/stores/authStore';
 import { useSettingsStore } from '../features/profile/stores/settingsStore';
 import { initializeAIService } from '../features/ai/services/init';
-import { initDatabase } from '../core/storage/database';
+import { initDatabase } from '../core/storage/sqlite';
 import { initializeStorage } from '../core/storage/mmkv';
 import { colors } from '../core/constants/colors';
 import { ThemeProvider, useTheme } from '../../constants/themeV2';
@@ -45,6 +45,14 @@ import AIProfileScreen from '../features/ai/screens/AIProfileScreen';
 import StatisticsScreen from '../features/ai/screens/StatisticsScreen';
 import KnowledgeBaseScreen from '../features/ai/screens/KnowledgeBaseScreen';
 import KnowledgeDetailScreen from '../features/ai/screens/KnowledgeDetailScreen';
+
+// Organization screens
+import EnterpriseListScreen from '../features/org/screens/EnterpriseListScreen';
+import EnterpriseDetailScreen from '../features/org/screens/EnterpriseDetailScreen';
+import EnterpriseFormScreen from '../features/org/screens/EnterpriseFormScreen';
+import DepartmentListScreen from '../features/org/screens/DepartmentListScreen';
+import DepartmentDetailScreen from '../features/org/screens/DepartmentDetailScreen';
+import DepartmentFormScreen from '../features/org/screens/DepartmentFormScreen';
 
 import { RootStackParamList, AuthStackParamList, MainTabParamList, AITabParamList } from '../types';
 
@@ -206,6 +214,12 @@ const linking = {
       Statistics: 'statistics',
       KnowledgeBase: 'knowledge-base',
       KnowledgeDetail: 'knowledge-detail',
+      EnterpriseList: 'enterprise-list',
+      EnterpriseDetail: 'enterprise-detail/:id',
+      EnterpriseForm: 'enterprise-form',
+      DepartmentList: 'department-list',
+      DepartmentDetail: 'department-detail/:id',
+      DepartmentForm: 'department-form',
     },
   },
 };
@@ -255,6 +269,12 @@ const RootNavigator = () => {
           <RootStack.Screen name="Statistics" component={StatisticsScreen} />
           <RootStack.Screen name="KnowledgeBase" component={KnowledgeBaseScreen} />
           <RootStack.Screen name="KnowledgeDetail" component={KnowledgeDetailScreen} />
+          <RootStack.Screen name="EnterpriseList" component={EnterpriseListScreen} />
+          <RootStack.Screen name="EnterpriseDetail" component={EnterpriseDetailScreen} />
+          <RootStack.Screen name="EnterpriseForm" component={EnterpriseFormScreen} />
+          <RootStack.Screen name="DepartmentList" component={DepartmentListScreen} />
+          <RootStack.Screen name="DepartmentDetail" component={DepartmentDetailScreen} />
+          <RootStack.Screen name="DepartmentForm" component={DepartmentFormScreen} />
         </>
       )}
     </RootStack.Navigator>

@@ -1,12 +1,11 @@
 import { create } from 'zustand';
 import { HazardRecord, HazardStatus, HazardType } from '../../../types';
-import { dbHelpers, syncHelpers } from '../../../core/storage/database';
+import { dbUtils, TableNames, syncHelpers } from '../../../core/storage/sqlite';
 import { config } from '../../../core/constants/config';
 import {
   EntityType,
   generateBusinessId,
   generateBusinessNo,
-  roleConfig,
 } from '../../../core/constants/business';
 
 interface HazardState {
@@ -30,63 +29,7 @@ interface HazardState {
   getHazardTypes: () => { code: HazardType; name: string; icon: string }[];
 }
 
-// Mock data
-const mockHazards: HazardRecord[] = [
-  {
-    id: 'hz1',
-    businessId: '174116100012300000001',
-    businessNo: 'HZ10001234001',
-    source: 'photo',
-    photos: [],
-    type: 'fire',
-    typeName: '火灾安全隐患',
-    locationId: 'loc1',
-    locationName: 'A区一楼',
-    description: '发现堆放杂物堵塞消防通道',
-    status: 'submitted',
-    userId: '3',
-    userName: 'user',
-    createdAt: Date.now() - 86400000,
-    updatedAt: Date.now() - 86400000,
-  },
-  {
-    id: 'hz2',
-    businessId: '174116100012300000002',
-    businessNo: 'HZ10001234002',
-    source: 'inspection',
-    photos: [],
-    type: 'electric',
-    typeName: '电力设施损坏',
-    locationId: 'loc3',
-    locationName: 'B区一楼',
-    description: '配电箱门损坏',
-    status: 'confirmed',
-    userId: '2',
-    userName: 'inspector',
-    assigneeId: '2',
-    confirmedAt: Date.now() - 43200000,
-    confirmedBy: 'admin',
-    createdAt: Date.now() - 172800000,
-    updatedAt: Date.now() - 43200000,
-  },
-  {
-    id: 'hz3',
-    businessId: '174116100012300000003',
-    businessNo: 'HZ10001234003',
-    source: 'photo',
-    photos: [],
-    type: 'construction',
-    typeName: '违章建筑施工',
-    locationId: 'loc2',
-    locationName: 'A区二楼',
-    description: '发现违章搭建',
-    status: 'accepted',
-    userId: '2',
-    userName: 'inspector',
-    createdAt: Date.now() - 604800000,
-    updatedAt: Date.now() - 259200000,
-  },
-];
+// Hazard types configuration - using config
 
 export const useHazardStore = create<HazardState>((set, get) => ({
   hazards: [],
@@ -97,64 +40,20 @@ export const useHazardStore = create<HazardState>((set, get) => ({
   fetchHazards: async (userId?: string, status?: HazardStatus) => {
     set({ isLoading: true });
     try {
-      const dbHazards = await dbHelpers.queryAll<any>('hazard_records');
+      // Query from real SQLite database
+      const dbHazards = await dbUtils.queryAll<any>(TableNames.HAZARD);
 
-      // 如果数据库为空，插入mock数据
-      if (dbHazards.length === 0) {
-        for (const hazard of mockHazards) {
-          await dbHelpers.insert('hazard_records', {
-            ...hazard,
-            photos: JSON.stringify(hazard.photos),
-            created_at: hazard.createdAt,
-            updated_at: hazard.updatedAt,
-          });
-        }
-        // 重新查询
-        const hazards = await dbHelpers.queryAll<any>('hazard_records');
-        // 映射数据库字段到HazardRecord
-        const mappedHazards = hazards.map((h: any) => ({
-          id: h.id,
-          businessId: h.business_id,
-          businessNo: h.business_no,
-          source: h.source,
-          photos: typeof h.photos === 'string' ? JSON.parse(h.photos) : h.photos || [],
-          type: h.type,
-          typeName: h.type_name,
-          locationId: h.location_id,
-          locationName: h.location_name,
-          description: h.description,
-          voiceNote: h.voice_note,
-          voiceDuration: h.voice_duration,
-          status: h.status,
-          userId: h.user_id,
-          userName: h.user_name,
-          assigneeId: h.assignee_id,
-          createdAt: h.created_at,
-          updatedAt: h.updated_at,
-        })) as HazardRecord[];
-
-        let filtered = mappedHazards;
-        if (userId) {
-          filtered = filtered.filter((h) => h.userId === userId);
-        }
-        if (status) {
-          filtered = filtered.filter((h) => h.status === status);
-        }
-        set({ hazards: filtered, isLoading: false });
-        return;
-      }
-
-      // 映射数据库字段到HazardRecord
+      // Map database fields to HazardRecord
       const hazards = dbHazards.map((h: any) => ({
         id: h.id,
         businessId: h.business_id,
         businessNo: h.business_no,
         source: h.source,
         photos: typeof h.photos === 'string' ? JSON.parse(h.photos) : h.photos || [],
-        type: h.type,
-        typeName: h.type_name,
-        locationId: h.location_id,
-        locationName: h.location_name,
+        type: h.hazard_type,
+        typeName: h.hazard_type_name,
+        locationId: h.location_desc,
+        locationName: h.location_desc,
         description: h.description,
         voiceNote: h.voice_note,
         voiceDuration: h.voice_duration,
@@ -177,18 +76,18 @@ export const useHazardStore = create<HazardState>((set, get) => ({
       set({ hazards: filtered, isLoading: false });
     } catch (error) {
       console.error('Error fetching hazards:', error);
-      set({ isLoading: false });
+      set({ hazards: [], isLoading: false });
     }
   },
 
   fetchHazardById: async (id: string) => {
-    const hazard = await dbHelpers.queryOne<any>('hazard_records', 'id = ?', [id]);
+    const hazard = await dbUtils.queryOne<any>(TableNames.HAZARD, 'id = ?', [id]);
     if (hazard) {
       return {
         ...hazard,
         photos: typeof hazard.photos === 'string' ? JSON.parse(hazard.photos) : hazard.photos,
-        typeName: hazard.type_name,
-        locationName: hazard.location_name,
+        typeName: hazard.hazard_type_name,
+        locationName: hazard.location_desc,
         userName: hazard.user_name,
         voiceNote: hazard.voice_note,
         voiceDuration: hazard.voice_duration,
@@ -196,7 +95,7 @@ export const useHazardStore = create<HazardState>((set, get) => ({
         updatedAt: hazard.updated_at,
       } as HazardRecord;
     }
-    return mockHazards.find((h) => h.id === id) || null;
+    return null;
   },
 
   createHazard: async (hazard: Partial<HazardRecord>) => {
@@ -230,7 +129,7 @@ export const useHazardStore = create<HazardState>((set, get) => ({
       updatedAt: now,
     };
 
-    await dbHelpers.insert('hazard_records', {
+    await dbUtils.insert(TableNames.HAZARD, {
       id: newHazard.id,
       business_id: newHazard.businessId,
       business_no: newHazard.businessNo,
@@ -280,7 +179,7 @@ export const useHazardStore = create<HazardState>((set, get) => ({
       if (updates.voiceNote !== undefined) dbUpdates.voice_note = updates.voiceNote;
       if (updates.voiceDuration !== undefined) dbUpdates.voice_duration = updates.voiceDuration;
 
-      await dbHelpers.update('hazard_records', dbUpdates, 'id = ?', [id]);
+      await dbUtils.update(TableNames.HAZARD, dbUpdates, 'id = ?', [id]);
 
       hazards[index] = updated;
       set({ hazards: [...hazards] });
@@ -288,7 +187,7 @@ export const useHazardStore = create<HazardState>((set, get) => ({
   },
 
   deleteHazard: async (id: string) => {
-    await dbHelpers.delete('hazard_records', 'id = ?', [id]);
+    await dbUtils.delete(TableNames.HAZARD, 'id = ?', [id]);
 
     const hazards = get().hazards.filter((h) => h.id !== id);
     set({ hazards });
@@ -297,8 +196,8 @@ export const useHazardStore = create<HazardState>((set, get) => ({
   submitHazard: async (hazard: HazardRecord) => {
     const updated = { ...hazard, status: 'submitted' as HazardStatus, updatedAt: Date.now() };
 
-    await dbHelpers.update(
-      'hazard_records',
+    await dbUtils.update(
+      TableNames.HAZARD,
       {
         status: 'submitted',
         updated_at: Date.now(),
@@ -326,8 +225,8 @@ export const useHazardStore = create<HazardState>((set, get) => ({
 
   confirmHazard: async (id: string, userId: string) => {
     const now = Date.now();
-    await dbHelpers.update(
-      'hazard_records',
+    await dbUtils.update(
+      TableNames.HAZARD,
       {
         status: 'confirmed',
         confirmed_at: now,
@@ -356,8 +255,8 @@ export const useHazardStore = create<HazardState>((set, get) => ({
 
   rectifyHazard: async (id: string, description: string, userId: string) => {
     const now = Date.now();
-    await dbHelpers.update(
-      'hazard_records',
+    await dbUtils.update(
+      TableNames.HAZARD,
       {
         status: 'rectifying',
         rectified_at: now,
@@ -386,8 +285,8 @@ export const useHazardStore = create<HazardState>((set, get) => ({
 
   acceptHazard: async (id: string, userId: string) => {
     const now = Date.now();
-    await dbHelpers.update(
-      'hazard_records',
+    await dbUtils.update(
+      TableNames.HAZARD,
       {
         status: 'accepted',
         accepted_at: now,
@@ -414,8 +313,8 @@ export const useHazardStore = create<HazardState>((set, get) => ({
 
   rejectHazard: async (id: string, reason: string, userId: string) => {
     const now = Date.now();
-    await dbHelpers.update(
-      'hazard_records',
+    await dbUtils.update(
+      TableNames.HAZARD,
       {
         status: 'rejected',
         reject_reason: reason,

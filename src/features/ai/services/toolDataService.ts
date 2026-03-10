@@ -1,7 +1,7 @@
 // Tool Data Service - 工具数据服务
 // 统一数据访问层，连接AI工具与业务数据
 
-import { dbHelpers } from '../../../core/storage/database';
+import { dbUtils, TableNames } from '../../../core/storage/sqlite';
 import type { Device, DeviceStatus , HazardRecord, HazardStatus, HazardType , InspectionTask } from '../../../types';
 
 // ==================== Device Data ====================
@@ -17,8 +17,8 @@ export async function queryDevices(options: {
   stats: { normal: number; warning: number; error: number; offline: number };
 }> {
   try {
-    // 从数据库查询真实数据
-    let devices = await dbHelpers.queryAll<any>('devices');
+    // 从真实SQLite数据库查询
+    let devices = await dbUtils.queryAll<any>(TableNames.DEVICE);
 
     if (devices.length === 0) {
       // 如果数据库为空，返回空数组（数据会被 stores 初始化）
@@ -83,8 +83,8 @@ export async function queryHazards(options: {
   stats: { draft: number; submitted: number; confirmed: number; rectifying: number; accepted: number; rejected: number };
 }> {
   try {
-    // 从数据库查询真实数据
-    let hazards = await dbHelpers.queryAll<any>('hazard_records');
+    // 从真实SQLite数据库查询
+    let hazards = await dbUtils.queryAll<any>(TableNames.HAZARD);
 
     if (hazards.length === 0) {
       return {
@@ -147,8 +147,8 @@ export async function queryTasks(options: {
   stats: { pending: number; in_progress: number; completed: number };
 }> {
   try {
-    // 从数据库查询真实数据
-    let tasks = await dbHelpers.queryAll<any>('inspection_tasks');
+    // 从真实SQLite数据库查询
+    let tasks = await dbUtils.queryAll<any>(TableNames.INSPECTION_TASK);
 
     if (tasks.length === 0) {
       return {

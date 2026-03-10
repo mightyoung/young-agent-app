@@ -473,9 +473,64 @@ export const dbUtils = {
   },
 };
 
+/**
+ * Sync helpers for offline queue management
+ */
+export const syncHelpers = {
+  addToQueue: async (item: any): Promise<void> => {
+    await dbUtils.insert(TableNames.SYNC_QUEUE, {
+      ...item,
+      id: item.id || `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      created_at: Date.now(),
+      retry_count: 0,
+      status: 'pending',
+    });
+  },
+  getPendingItems: async (): Promise<any[]> => {
+    return await dbUtils.queryAll(TableNames.SYNC_QUEUE, 'status = ?', ['pending']);
+  },
+  markSynced: async (id: string): Promise<void> => {
+    await dbUtils.delete(TableNames.SYNC_QUEUE, 'id = ?', [id]);
+  },
+  markFailed: async (id: string, retryCount: number): Promise<void> => {
+    await dbUtils.update(
+      TableNames.SYNC_QUEUE,
+      { retry_count: retryCount, status: retryCount >= 3 ? 'failed' : 'pending' },
+      'id = ?',
+      [id]
+    );
+  },
+};
+
 export default {
   getDatabase,
   initDatabase,
   TableNames,
   dbUtils,
+  // Re-export sync helpers for compatibility
+  syncHelpers: {
+    addToQueue: async (item: any): Promise<void> => {
+      await dbUtils.insert(TableNames.SYNC_QUEUE, {
+        ...item,
+        id: item.id || `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        created_at: Date.now(),
+        retry_count: 0,
+        status: 'pending',
+      });
+    },
+    getPendingItems: async (): Promise<any[]> => {
+      return await dbUtils.queryAll(TableNames.SYNC_QUEUE, 'status = ?', ['pending']);
+    },
+    markSynced: async (id: string): Promise<void> => {
+      await dbUtils.delete(TableNames.SYNC_QUEUE, 'id = ?', [id]);
+    },
+    markFailed: async (id: string, retryCount: number): Promise<void> => {
+      await dbUtils.update(
+        TableNames.SYNC_QUEUE,
+        { retry_count: retryCount, status: retryCount >= 3 ? 'failed' : 'pending' },
+        'id = ?',
+        [id]
+      );
+    },
+  },
 };

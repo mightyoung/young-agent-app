@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { InspectionRecord, InspectionTask, InspectionItemResult } from '../../../types';
-import { dbHelpers, syncHelpers } from '../../../core/storage/database';
+import { dbUtils, TableNames, syncHelpers } from '../../../core/storage/sqlite';
 
 interface InspectionState {
   records: InspectionRecord[];
@@ -20,71 +20,6 @@ interface InspectionState {
   fetchTaskById: (id: string) => Promise<InspectionTask | null>;
 }
 
-// Mock data
-const mockRecords: InspectionRecord[] = [
-  {
-    id: 'ins1',
-    deviceId: 'dev1',
-    deviceName: '1号消防栓',
-    userId: '2',
-    userName: 'inspector',
-    type: 'scan',
-    status: 'completed',
-    result: 'pass',
-    items: [
-      { itemId: 'item1', itemName: '检查消防栓是否有水', result: 'pass' },
-      { itemId: 'item2', itemName: '检查消防栓周围是否有杂物', result: 'pass' },
-    ],
-    photos: [],
-    notes: '设备正常',
-    createdAt: Date.now() - 86400000,
-    updatedAt: Date.now() - 86400000,
-  },
-  {
-    id: 'ins2',
-    deviceId: 'dev2',
-    deviceName: '2号灭火器',
-    userId: '2',
-    userName: 'inspector',
-    type: 'safety',
-    status: 'completed',
-    result: 'partial',
-    items: [
-      { itemId: 'item4', itemName: '检查压力表', result: 'pass' },
-      { itemId: 'item5', itemName: '检查有效期', result: 'fail', notes: '已过期' },
-    ],
-    photos: [],
-    notes: '需更换灭火器',
-    createdAt: Date.now() - 172800000,
-    updatedAt: Date.now() - 172800000,
-  },
-];
-
-const mockTasks: InspectionTask[] = [
-  {
-    id: 'task1',
-    name: '月度消防检查',
-    description: '对全厂消防设备进行月度检查',
-    deviceIds: ['dev1', 'dev2'],
-    checklistTemplateId: 'tpl1',
-    assigneeIds: ['2'],
-    dueDate: Date.now() + 7 * 86400000,
-    status: 'pending',
-    createdAt: Date.now() - 86400000,
-  },
-  {
-    id: 'task2',
-    name: '电气安全检查',
-    description: '对全厂电气设备进行安全检查',
-    deviceIds: ['dev3'],
-    checklistTemplateId: 'tpl2',
-    assigneeIds: ['2'],
-    dueDate: Date.now() + 14 * 86400000,
-    status: 'pending',
-    createdAt: Date.now() - 43200000,
-  },
-];
-
 export const useInspectionStore = create<InspectionState>((set, get) => ({
   records: [],
   tasks: [],
@@ -94,61 +29,78 @@ export const useInspectionStore = create<InspectionState>((set, get) => ({
   fetchRecords: async (userId?: string, deviceId?: string) => {
     set({ isLoading: true });
     try {
-      let records = await dbHelpers.queryAll<any>('inspection_records');
+      // Query from real SQLite database
+      let records = await dbUtils.queryAll<any>(TableNames.INSPECTION_RECORD);
 
-      if (records.length === 0) {
-        records = mockRecords;
-        for (const record of records) {
-          await dbHelpers.insert('inspection_records', {
-            ...record,
-            items: JSON.stringify(record.items),
-            photos: JSON.stringify(record.photos),
-            created_at: record.createdAt,
-            updated_at: record.updatedAt,
-          });
-        }
-      }
-
-      let filtered = records.map((r: any) => ({
-        ...r,
-        items: typeof r.items === 'string' ? JSON.parse(r.items) : r.items,
-        photos: typeof r.photos === 'string' ? JSON.parse(r.photos) : r.photos,
+      // Map database fields to InspectionRecord
+      let mappedRecords = records.map((r: any) => ({
+        id: r.id,
+        recordNo: r.record_no,
+        taskId: r.task_id,
+        taskNo: r.task_no,
+        deviceId: r.device_id,
+        deviceName: r.device_name,
+        userId: r.user_id,
+        userName: r.user_name,
+        type: r.type,
+        checkDate: r.check_date,
+        status: r.status,
+        result: r.result,
+        locationGps: r.location_gps,
+        items: typeof r.items === 'string' ? JSON.parse(r.items) : r.items || [],
+        photos: typeof r.photos === 'string' ? JSON.parse(r.photos) : r.photos || [],
+        remark: r.remark,
         createdAt: r.created_at,
-        updatedAt: r.updated_at,
+        submittedAt: r.submitted_at,
       })) as InspectionRecord[];
 
+      // Filter by userId and deviceId
       if (userId) {
-        filtered = filtered.filter((r) => r.userId === userId);
+        mappedRecords = mappedRecords.filter((r) => r.userId === userId);
       }
       if (deviceId) {
-        filtered = filtered.filter((r) => r.deviceId === deviceId);
+        mappedRecords = mappedRecords.filter((r) => r.deviceId === deviceId);
       }
 
-      set({ records: filtered, isLoading: false });
+      set({ records: mappedRecords, isLoading: false });
     } catch (error) {
       console.error('Error fetching records:', error);
-      set({ isLoading: false });
+      set({ records: [], isLoading: false });
     }
   },
 
   fetchRecordById: async (id: string) => {
-    const record = await dbHelpers.queryOne<any>('inspection_records', 'id = ?', [id]);
+    const record = await dbUtils.queryOne<any>(TableNames.INSPECTION_RECORD, 'id = ?', [id]);
     if (record) {
       return {
-        ...record,
-        items: typeof record.items === 'string' ? JSON.parse(record.items) : record.items,
-        photos: typeof record.photos === 'string' ? JSON.parse(record.photos) : record.photos,
+        id: record.id,
+        recordNo: record.record_no,
+        taskId: record.task_id,
+        taskNo: record.task_no,
+        deviceId: record.device_id,
+        deviceName: record.device_name,
+        userId: record.user_id,
+        userName: record.user_name,
+        type: record.type,
+        checkDate: record.check_date,
+        status: record.status,
+        result: record.result,
+        locationGps: record.location_gps,
+        items: typeof record.items === 'string' ? JSON.parse(record.items) : record.items || [],
+        photos: typeof record.photos === 'string' ? JSON.parse(record.photos) : record.photos || [],
+        remark: record.remark,
         createdAt: record.created_at,
-        updatedAt: record.updated_at,
+        submittedAt: record.submitted_at,
       } as InspectionRecord;
     }
-    return mockRecords.find((r) => r.id === id) || null;
+    return null;
   },
 
   createRecord: async (record: Partial<InspectionRecord>) => {
     const now = Date.now();
+    const recordId = `ins_${now}`;
     const newRecord: InspectionRecord = {
-      id: `ins_${now}`,
+      id: recordId,
       deviceId: record.deviceId || '',
       deviceName: record.deviceName,
       userId: record.userId || '',
@@ -163,12 +115,21 @@ export const useInspectionStore = create<InspectionState>((set, get) => ({
       updatedAt: now,
     };
 
-    await dbHelpers.insert('inspection_records', {
-      ...newRecord,
+    await dbUtils.insert(TableNames.INSPECTION_RECORD, {
+      id: newRecord.id,
+      device_id: newRecord.deviceId,
+      device_name: newRecord.deviceName,
+      user_id: newRecord.userId,
+      user_name: newRecord.userName,
+      task_id: newRecord.taskId,
+      type: newRecord.type,
+      status: newRecord.status,
       items: JSON.stringify(newRecord.items),
       photos: JSON.stringify(newRecord.photos),
+      remark: newRecord.notes,
       created_at: newRecord.createdAt,
       updated_at: newRecord.updatedAt,
+      sync_status: 'pending',
     });
 
     set({ records: [...get().records, newRecord], currentRecord: newRecord });
@@ -183,17 +144,17 @@ export const useInspectionStore = create<InspectionState>((set, get) => ({
     if (index >= 0) {
       const updated = { ...records[index], ...updates, updatedAt: Date.now() };
 
-      await dbHelpers.update(
-        'inspection_records',
-        {
-          ...updates,
-          items: JSON.stringify(updates.items || records[index].items),
-          photos: JSON.stringify(updates.photos || records[index].photos),
-          updated_at: Date.now(),
-        },
-        'id = ?',
-        [id]
-      );
+      // Map updates to database fields
+      const dbUpdates: any = {
+        updated_at: Date.now(),
+      };
+      if (updates.items !== undefined) dbUpdates.items = JSON.stringify(updates.items);
+      if (updates.photos !== undefined) dbUpdates.photos = JSON.stringify(updates.photos);
+      if (updates.status !== undefined) dbUpdates.status = updates.status;
+      if (updates.result !== undefined) dbUpdates.result = updates.result;
+      if (updates.notes !== undefined) dbUpdates.remark = updates.notes;
+
+      await dbUtils.update(TableNames.INSPECTION_RECORD, dbUpdates, 'id = ?', [id]);
 
       records[index] = updated;
       set({ records: [...records] });
@@ -201,7 +162,7 @@ export const useInspectionStore = create<InspectionState>((set, get) => ({
   },
 
   deleteRecord: async (id: string) => {
-    await dbHelpers.delete('inspection_records', 'id = ?', [id]);
+    await dbUtils.delete(TableNames.INSPECTION_RECORD, 'id = ?', [id]);
 
     const records = get().records.filter((r) => r.id !== id);
     set({ records });
@@ -210,15 +171,16 @@ export const useInspectionStore = create<InspectionState>((set, get) => ({
   submitRecord: async (record: InspectionRecord) => {
     const updated = { ...record, status: 'completed' as const, updatedAt: Date.now() };
 
-    await dbHelpers.update(
-      'inspection_records',
+    await dbUtils.update(
+      TableNames.INSPECTION_RECORD,
       {
         status: 'completed',
         result: record.result,
-        notes: record.notes,
+        remark: record.notes,
         items: JSON.stringify(record.items),
         photos: JSON.stringify(record.photos),
         updated_at: Date.now(),
+        submitted_at: Date.now(),
         sync_status: 'pending',
       },
       'id = ?',
@@ -246,39 +208,55 @@ export const useInspectionStore = create<InspectionState>((set, get) => ({
   },
 
   fetchTasks: async () => {
-    const tasks = await dbHelpers.queryAll<InspectionTask>('inspection_tasks');
-    if (tasks.length === 0) {
-      for (const task of mockTasks) {
-        await dbHelpers.insert('inspection_tasks', {
-          ...task,
-          device_ids: JSON.stringify(task.deviceIds),
-          assignee_ids: JSON.stringify(task.assigneeIds),
-          created_at: task.createdAt,
-        });
-      }
-      set({ tasks: mockTasks });
-    } else {
-      set({
-        tasks: tasks.map((t: any) => ({
-          ...t,
-          deviceIds: typeof t.device_ids === 'string' ? JSON.parse(t.device_ids) : t.deviceIds,
-          assigneeIds: typeof t.assignee_ids === 'string' ? JSON.parse(t.assignee_ids) : t.assigneeIds,
-          createdAt: t.created_at,
-        })),
-      });
-    }
+    const tasks = await dbUtils.queryAll<any>(TableNames.INSPECTION_TASK);
+    set({
+      tasks: tasks.map((t: any) => ({
+        id: t.id,
+        taskNo: t.task_no,
+        taskType: t.task_type,
+        deviceIds: typeof t.device_ids === 'string' ? JSON.parse(t.device_ids) : t.deviceIds || [],
+        deviceNames: t.device_names,
+        deptId: t.dept_id,
+        deptName: t.dept_name,
+        assigneeId: t.assignee_id,
+        assigneeName: t.assignee_name,
+        assignerId: t.assigner_id,
+        assignerName: t.assigner_name,
+        planDate: t.plan_date,
+        dueDate: t.due_date,
+        status: t.status,
+        priority: t.priority,
+        remark: t.remark,
+        createdAt: t.created_at,
+        completedAt: t.completed_at,
+      })),
+    });
   },
 
   fetchTaskById: async (id: string) => {
-    const task = await dbHelpers.queryOne<any>('inspection_tasks', 'id = ?', [id]);
+    const task = await dbUtils.queryOne<any>(TableNames.INSPECTION_TASK, 'id = ?', [id]);
     if (task) {
       return {
-        ...task,
-        deviceIds: typeof task.device_ids === 'string' ? JSON.parse(task.device_ids) : task.deviceIds,
-        assigneeIds: typeof task.assignee_ids === 'string' ? JSON.parse(task.assignee_ids) : task.assigneeIds,
+        id: task.id,
+        taskNo: task.task_no,
+        taskType: task.task_type,
+        deviceIds: typeof task.device_ids === 'string' ? JSON.parse(task.device_ids) : task.deviceIds || [],
+        deviceNames: task.device_names,
+        deptId: task.dept_id,
+        deptName: task.dept_name,
+        assigneeId: task.assignee_id,
+        assigneeName: task.assignee_name,
+        assignerId: task.assigner_id,
+        assignerName: task.assigner_name,
+        planDate: task.plan_date,
+        dueDate: task.due_date,
+        status: task.status,
+        priority: task.priority,
+        remark: task.remark,
         createdAt: task.created_at,
+        completedAt: task.completed_at,
       } as InspectionTask;
     }
-    return mockTasks.find((t) => t.id === id) || null;
+    return null;
   },
 }));

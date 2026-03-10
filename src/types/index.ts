@@ -83,6 +83,14 @@ export type RootStackParamList = {
   Statistics: undefined;
   KnowledgeBase: undefined;
   KnowledgeDetail: { article: { id: string; title: string; content: string } };
+
+  // Organization Management
+  EnterpriseList: undefined;
+  EnterpriseDetail: { id: string };
+  EnterpriseForm: { id?: string };
+  DepartmentList: undefined;
+  DepartmentDetail: { id: string };
+  DepartmentForm: { id?: string; enterpriseId?: string };
 };
 
 // Screen props types
